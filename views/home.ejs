@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Question Generator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384- fgWb/rBcYhR3+eQvgyEk/btR7C9VmDviR4uHWxUTQYjUoCVwrqXgwnkWRO23hGa *" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384- fgWb/rBcYhR3+eQvgyEk/btR7C9VmDviR4uHWxUTQYjUoCVwrqXgwnkWRO23hGa *" crossorigin="anonymous"></script>
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding-top: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    #askButton {
+      width: 100%;
+    }
+    #response {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body style="background-color: rgb(255, 255, 255);">
+  <div class="container" style="background-color: rgb(204, 225, 240);">
+    <h4 class="header">Create Physics Questions</h4>
+    <% if (typeof error !== 'undefined') { %>
+      <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+    <div id="form">
+      <form action="/generate-questions" method="post">
+        <div class="form-group">
+          <label for="topic">Topic and other details:</label>
+          <input type="text" class="form-control" id="topic" name="topic" placeholder="Enter a topic">
+        </div>
+        <div class="form-group">
+          <label for="type">Type of question:</label>
+          <select class="form-select" id="type" name="type">
+            <option value="Theoretical">Theoretical</option>
+            <option value="Numerical">Numerical</option>
+            <option value="Both Theoretical and Numerical">Both Theoretical and Numerical</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="complexity">Complexity (1-5):</label>
+          <select class="form-select" id="complexity" name="complexity">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="example">Example question (Optional):</label>
+          <textarea class="form-control" id="example" name="example" style="height: 150px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="number">Number of questions:</label>
+          <input type="number" class="form-control" id="number" name="number" placeholder="Number of Questions" max="15">
+        </div>
+        <button id="askButton" class="btn btn-primary" type="submit">Create Questions</button>
+      </form>
+      
+      <form action="https://www.linkedin.com/in/jewel-syriac-475581bb">
+        <button class="btn btn-success mt-3">
+          About the Developer
+        </button></form>
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+      <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="display: none;"></div>
+      <div id="response"></div>
+    </div>
+    
+    <script>
+      document.querySelector('form').addEventListener('submit', () => {
+        document.getElementById('loadingSpinner').style.display = 'block';
+      });
+    </script>
+  </div>
+</body>
+</html>
